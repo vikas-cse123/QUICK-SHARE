@@ -1,23 +1,45 @@
-import express from "express"
-import { connectDb } from "./config/db.js"
-const app = express()
-const PORT = process.env.PORT
+import express from "express";
+import notesRoutes from "./routes/notes.routes.js";
+import { connectDb } from "./config/db.js";
+import notesModel from "./models/notes.model.js";
+const app = express();
+const PORT = process.env.PORT;
 
-await connectDb()
+await connectDb();
 
+app.use("/notes", notesRoutes);
 
+app.get("/categories", (req, res) => {
+  const categories = [
+    "None",
+    "Cryptocurrency",
+    "Cybersecurity",
+    "Fixit",
+    "Food",
+    "Gaming",
+    "Haiku",
+    "Help",
+    "History",
+    "Housing",
+    "Jokes",
+    "Legal",
+    "Money",
+    "Movies",
+    "Music",
+    "Pets",
+    "Photo",
+    "Science",
+    "Software",
+    "Source Code",
+    "Spirit",
+    "Sports",
+    "Travel",
+    "TV",
+    "Writing",
+  ];
+  res.status(200).json(categories);
+});
 
-
-
-
-app.get("/categories",(req,res) => {
-    const categories = ["None","Cryptocurrency","Cybersecurity","Fixit","Food","Gaming","Haike","Help","History","Housing","Jokes","Legal",'Money','Movies',"Music","Pets","Photo","Science","Software","Source Code","Spirit","Sports","Travel","TV","Writing"]
-    res.status(200).json(categories)
-    
-})
-
-
-
-app.listen(PORT,() => {
-    console.log("Server Started")
-})
+app.listen(PORT, () => {
+  console.log("Server Started");
+});
