@@ -77,15 +77,32 @@ export const getBurnAfterReadNote = async (req, res) => {
       }
     }
     note.isDeleted = true;
-    await note.save()
+    await note.save();
     return res.status(200).json({ success: true, data: note });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Failed to get note." });
-
   }
 };
 
+//Add zod validation
+export const getPasswordProtectedNote = async (req, res) => {
+  try {
+    const note = req.note;
+    if (!note.isPassword) {
+      return res.status(200).json({ success: true, note });
+    }
+    const password = req.body.password;
 
-
-export const getPasswordProtectedNote = async (req, res) => {};
+    const isPasswordCorrect = await bcrypt.comparePassword(password);
+    if (!isPasswordCorrect) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Password is Incorrect." });
+    }
+    return res.status(200).json({ success: false, note });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Failed to get note." });
+  }
+};
