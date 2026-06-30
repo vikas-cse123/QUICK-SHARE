@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+//userId
 const notesSchema = new mongoose.Schema(
   {
     id:{
@@ -106,5 +107,10 @@ notesSchema.pre("save", async function () {
     this.isPassword = true;
   }
 });
+
+notesSchema.methods.comparePassword = async function(enteredPassword){
+ 
+  return await bcrypt.compare(enteredPassword,this.password)
+}
 
 export default mongoose.model("Note", notesSchema);
