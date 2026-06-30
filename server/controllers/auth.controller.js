@@ -1,6 +1,6 @@
 import crypto from "crypto";
-import User from "./models/users.model.js";
-import Session from "./models/session.models.js";
+import User from "../models/users.model.js";
+import Session from "../models/session.models.js";
 export const googleCallbackController = async (req, res, next) => {
   try {
     const token = await exchangeGoogleCodeForToken(req.query.code);

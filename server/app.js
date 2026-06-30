@@ -14,6 +14,7 @@ const PORT = process.env.PORT;
 
 await connectDb();
 
+app.use(express.json())
 app.use(cookieParser());
 
 app.use((req, res, next) => {
