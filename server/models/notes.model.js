@@ -2,12 +2,13 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 const notesSchema = new mongoose.Schema(
   {
+    id:{
+      type:String,
+      required:true
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: function () {
-        return !this.isGuestUser;
-      },
+      ref: "Users"
     },
     content: {
       type: String,
