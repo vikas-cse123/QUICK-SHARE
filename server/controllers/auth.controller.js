@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import User from "../models/users.model.js";
 import Session from "../models/session.models.js";
+import { exchangeGoogleCodeForToken,getGoogleUserInfo } from "../services/googleAuth.service.js";
 export const googleCallbackController = async (req, res, next) => {
   try {
     const token = await exchangeGoogleCodeForToken(req.query.code);
@@ -36,6 +37,9 @@ export const googleCallbackController = async (req, res, next) => {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 30 * 1000,
     });
-    res.status(200).json({ success: true, message: "Login successful" });
-  } catch (error) {}
+    // res.status(200).json({ success: true, message: "Login successful" });
+    res.redirect(`${process.env.CLIENT_URL}?login=true`)
+  } catch (error) {
+    console.log(error);
+  }
 };

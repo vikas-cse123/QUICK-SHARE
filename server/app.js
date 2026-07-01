@@ -1,5 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors"
 import notesRoutes from "./routes/notes.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import { connectDb } from "./config/db.js";
@@ -13,7 +14,9 @@ const app = express();
 const PORT = process.env.PORT;
 
 await connectDb();
-
+app.use(cors({
+  origin:process.env.CLIENT_URL
+}))
 app.use(express.json())
 app.use(cookieParser());
 

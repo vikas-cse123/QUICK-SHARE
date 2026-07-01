@@ -16,14 +16,15 @@ export const createNote = async (req, res) => {
       data.isGuestUser = true;
     }
     if (
-      req.body.expiresAt &&
-      req.body.expiresAt.toString().toLowerCase() !== "never"
+      req.body?.expiresAt &&
+      req.body?.expiresAt.toString().toLowerCase() !== "never"
     ) {
       data.expiresAt = new Date(Date.now() + req.body.expiresAt);
     }
     data.id = await getNoteUniqueId();
 
     const note = await Note.create(data);
+    console.log(note);
     res.status(201).json({
       success: true,
       message: "Note created successfully.",
