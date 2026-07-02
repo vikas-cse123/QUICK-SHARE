@@ -1,12 +1,23 @@
-.new-paste-container{
-   
-    border: 2px solid black;
+Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.logo-container{
-    max-width: 100px;
+Header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.new-paste-container {
+  border: 2px solid black;
 }
 
-.logo-container>img{
-    width: 100%;
+.logo-container {
+  max-width: 100px;
+}
+
+.logo-container > img {
+  width: 100%;
 }

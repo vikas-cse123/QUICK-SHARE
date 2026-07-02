@@ -1,9 +1,5 @@
-import { redirectToGoogleAuth } from "../services/googleAuth";
+import { redirectToGoogleAuth } from "../services/authService";
 
 export const GoogleLoginButton = () => {
-  return (
-    
-      <button onClick={redirectToGoogleAuth}>Continue with Google</button>
-    
-  );
+  return <button onClick={redirectToGoogleAuth}>Continue with Google</button>;
 };

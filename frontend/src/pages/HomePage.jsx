@@ -1,29 +1,32 @@
-import { useEffect, useState } from 'react'
-import { GoogleLoginButton } from '../features/auth/components/GoogleLoginButton'
-import { Abc } from '../rough/a';
-import { Header } from '../components/Header';
+import { useEffect, useState } from "react";
+import { Header } from "../components/Header";
+import { fetchUser } from "../features/auth/services/authService";
 
-const fetchUser = async () => {
-  console.log("Running fetch user fn");
-  const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/me`,{credentials:"include"})
-  const data = await response.json()
-  return data
-}
 
 
 export const HomePage = () => {
-  const [user,setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [showDetailsDropdown, setShowDetailsDropdown] = useState(false);
+
   useEffect(() => {
-   (async () => {
-    const data = await fetchUser()
-    setUser(data.data)
-   })()
-  },[])
+    (async () => {
+      const data = await fetchUser();
+      if (data.success) {
+        setUser(data.data);
+      }
+    })();
+
+    document.addEventListener("click", () => {
+      setShowDetailsDropdown(false);
+    });
+  }, []);
+
   return (
-    <Header user={user}></Header>
-    // <div>
-    //   {user ? <Abc data={user}/> : <GoogleLoginButton/>}
-      
-    // </div>
-  )
-}
+    <Header
+      user={user}
+      setUser={setUser}
+      showDetailsDropdown={showDetailsDropdown}
+      setShowDetailsDropdown={setShowDetailsDropdown}
+    ></Header>
+  );
+};
