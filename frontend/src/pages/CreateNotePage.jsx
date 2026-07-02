@@ -74,40 +74,32 @@ const selectInputsData = [
 
 
 const createNotePage = () => {
-  console.log("Rendering app component");
   const [content, setContent] = useState("A");
-  const [user, setUser] = useState();
   const [windowSize, setWindowSize] = useState({
     height: "600px",
     width: "600px",
   });
 
-  useEffect(() => {
+    useEffect(() => {
     window.addEventListener("resize", () => {
-      console.log("a");
       setWindowSize({
         height: window.innerHeight * 0.6,
         width: window.innerWidth * 0.6,
       });
     });
   }, []);
-const handleChange = (e) => {
+    const handleChange = (e) => {
   setContent(e.target.value);
 };
   const createNote = async() => {
-    console.log("Running create note fn");
     if (!content || content.length === 0) {
       return notify("You cannot create an empty paste.");
     }
 
-    console.log(result);
-    if(result.success){
-      console.log(result.data.id);
-    }
+    
   };
 
   return (
-    // <GoogleLoginButton/>
     <>
       <Toaster />
       <textarea

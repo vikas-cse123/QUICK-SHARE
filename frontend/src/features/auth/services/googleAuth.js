@@ -1,4 +1,5 @@
 export const redirectToGoogleAuth = () => {
+    console.log(import.meta.env.VITE_GOOGLE_REDIRECT_URI);
     const params = new URLSearchParams({
         client_id:import.meta.env.VITE_GOOGLE_CLIENT_ID,
         redirect_uri:import.meta.env.VITE_GOOGLE_REDIRECT_URI,
