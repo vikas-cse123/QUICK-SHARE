@@ -23,6 +23,7 @@ app.use(cookieParser());
 
 app.use((req, res, next) => {
   logWithTime(`${req.method} ${req.originalUrl}`);
+  console.log(req.cookies);
   next();
 });
 
@@ -60,6 +61,10 @@ app.get("/categories", (req, res) => {
   res.status(200).json(categories);
 });
 
+
+app.use((err,req,res,next) => {
+  res.status(500).json({success:false,message:"Something went wrong"})
+})
 app.listen(PORT, () => {
   console.log("Server Started");
 });

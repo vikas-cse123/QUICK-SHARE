@@ -14,7 +14,7 @@ export const redirectToGoogleAuth = () => {
 
 
 
-export const fetchUser = async () => {
+export const fetchCurrentUser = async () => {
   const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/me`, {
     credentials: "include",
   });
@@ -28,6 +28,13 @@ export const logoutUser = async () => {
         method:"POST",
         credentials:"include"
     })
+    const data = await response.json()
+    return data
+}
+
+
+export const fetchUser = async (id) => {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/user/${id}`)
     const data = await response.json()
     return data
 }

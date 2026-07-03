@@ -82,3 +82,21 @@ export const logout = async (req, res) => {
 
   }
 };
+
+export const fetchUser = async (req,res) => {
+  try {
+    console.log(req.params);
+    const user = await User.findOne({id:req.params.userId})
+    if(!user){
+      return res.status(400).json({success:false,message:"User not found"})
+    };
+    res.status(200).json({success:true,data:user})
+    
+    
+  } catch (error) {
+    console.log(error);
+    next(error)
+    
+  }
+
+}

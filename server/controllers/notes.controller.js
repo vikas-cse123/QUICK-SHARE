@@ -16,8 +16,8 @@ export const createNote = async (req, res) => {
       data.isGuestUser = true;
     }
     if (
-      req.body?.expiresAt &&
-      req.body?.expiresAt.toString().toLowerCase() !== "never"
+      req.body?.expiration &&
+      req.body?.expiration.toString().toLowerCase() !== "never"
     ) {
       data.expiresAt = new Date(Date.now() + req.body.expiresAt);
     }
@@ -41,7 +41,7 @@ export const getNote = async (req, res) => {
     const note = req.note;
     console.log(note);
     if (!note.isPassword && !note.isBurnAfterRead) {
-      return res.status(200).json(note);
+      return res.status(200).json({success:true,data:note});
     }
     if (note.isBurnAfterRead) {
       return res.status(200).json({

@@ -8,7 +8,7 @@ const notesSchema = new mongoose.Schema(
       required:true
     },
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "Users"
     },
     content: {
